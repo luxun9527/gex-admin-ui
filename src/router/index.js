@@ -1,16 +1,22 @@
 import {createRouter, createWebHashHistory} from 'vue-router';
+const Index = () => import('@/views/layout/index.vue')
+const Home = () => import('@/views/layout/aside/home.vue')
+const Symbol = () => import('@/views/layout/aside/symbol.vue')
+const ErrorCode = () => import('@/views/layout/aside/errorCode.vue')
+const Coin = () => import('@/views/layout/aside/coin.vue')
+const Login = () => import('@/views/login/index.vue')
 
 // 本地静态路由
 export const constantRoutes = [
     {
         path: '/',
         name: 'index',
-        component: () => import('@/views/layout/index.vue'),
+        component:Index,
         children: [{
 
             path: '/symbol',
             name: 'symbol',
-            component: import('@/views/layout/aside/symbol.vue'),
+            component: Symbol,
             meta: {
                 title: '交易对管理',
             },
@@ -20,7 +26,7 @@ export const constantRoutes = [
                 // UserProfile 将被渲染到 User 的 <router-view> 内部
                 path: '/errorCode',
                 name: 'errorCode',
-                component: import('@/views/layout/aside/errorCode.vue'),
+                component: ErrorCode,
                 meta: {
                     title: '错误码管理',
                 },
@@ -28,7 +34,7 @@ export const constantRoutes = [
                 // 币种管理
                 path: '/coin',
                 name: 'coin',
-                component: import('@/views/layout/aside/coin.vue'),
+                component: Coin,
                 meta: {
                     title: '币种管理',
                 },
@@ -36,7 +42,7 @@ export const constantRoutes = [
                 // 币种管理
                 path: '/home',
                 name: 'home',
-                component: import('@/views/layout/aside/home.vue'),
+                component: Home,
                 meta: {
                     title: '首页',
                 },
@@ -45,7 +51,7 @@ export const constantRoutes = [
     {
         path: '/login',
         name: 'login',
-        component: () => import('@/views/login/index.vue'),
+        component:Login,
         meta: {
             isParentView: true,
         },

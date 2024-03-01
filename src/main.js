@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 
 import 'element-plus/dist/index.css'
-import './style/element_visiable.scss'
+//import './style/element_visiable.scss'
 
 
 import App from './App.vue'
