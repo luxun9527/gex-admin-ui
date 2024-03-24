@@ -46,14 +46,14 @@ import {ElMessage} from "element-plus";
 let dialogFormVisible = $ref(false)
 let errCodeList = $ref([])
 let dialogFlag = $ref('新增')
-const form = ref({})
+let form = $ref({})
 
 const cancel = () =>{
   dialogFormVisible = false
   closeDialog()
 }
 const closeDialog = ()=>{
-   form.value={
+   form={
     error_code_id: '',
     error_code_name: '',
     language:''
@@ -67,19 +67,20 @@ const handleAddCoin = async()=>{
 const handleEdit = async(row)=>{
   dialogFormVisible = true
   dialogFlag = '编辑'
-  form.value={
+  form={
     error_code_id: row.error_code_id,
     error_code_name: row.error_code_name,
-    language:row.language
+    language:row.language,
+    id:row.id
   }
 
 }
 const submitForm = async()=>{
   dialogFormVisible = false
-  form.value.error_code_id = Number(form.value.error_code_id)
+  form.error_code_id = Number(form.error_code_id)
 
   if (dialogFlag ==='新增'){
-    let res = await addErrorCode(form.value)
+    let res = await addErrorCode(form)
     if (res.code===0){
       await getTableData()
       ElMessage({
@@ -89,7 +90,7 @@ const submitForm = async()=>{
       });
     }
   }else{
-    let res = await updateErrorCode(form.value)
+    let res = await updateErrorCode(form)
     if (res.code===0){
       await getTableData()
       ElMessage({

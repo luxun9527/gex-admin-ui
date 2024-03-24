@@ -17,7 +17,7 @@
               <span>用户名: admin</span>
               <span class="m-l-20"> 密码: 123456</span>
             </div>
-            <el-button type="primary" style="width: 100%" @click="handleLogin">登 录</el-button>
+            <el-button type="primary" style="width: 100%" @click="handleLogin" >登 录</el-button>
         </div>
       </div>
     </div>

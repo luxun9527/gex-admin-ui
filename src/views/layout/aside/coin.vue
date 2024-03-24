@@ -44,13 +44,10 @@ let dialogFormVisible = $ref(false)
 
 let coinList = $ref([])
 let dialogFlag = $ref('新增')
-const form = ref({
-  coin_name: '',
-  prec: '',
-})
+let form = $ref({})
 const closeDialog = ()=>{
   dialogFlag = false
-  form.value={
+  form={
     coin_name: '',
     prec: '',
   }
@@ -66,7 +63,7 @@ const handleAddCoin = async()=>{
 const handleEdit = async(row)=>{
   dialogFormVisible = true
   dialogFlag = '编辑'
-  form.value = {
+  form = {
     coin_name: row.coin_name,
     prec: row.prec,
     id: row.id
@@ -76,10 +73,10 @@ const handleEdit = async(row)=>{
 }
 const submitForm = async()=>{
   dialogFormVisible = false
-  form.value.prec = Number(form.value.prec)
+  form.prec = Number(form.prec)
 
   if (dialogFlag === '新增') {
-    let res = await addCoin(form.value)
+    let res = await addCoin(form)
     if (res.code===0){
       await getTableData()
       ElMessage({
@@ -89,7 +86,7 @@ const submitForm = async()=>{
       });
     }
   }else{
-    let res = await updateCoin(form.value)
+    let res = await updateCoin(form)
     if (res.code===0){
       await getTableData()
       ElMessage({
