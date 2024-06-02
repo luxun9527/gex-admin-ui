@@ -3,8 +3,11 @@
     <el-button  @click="handleAddSymbol">
       新增交易对
     </el-button>
+    <el-button @click="handleSyncSymbol">
+      同步
+    </el-button>
     <el-dialog  v-model="dialogFormVisible" title="新增交易对" width="500" @close="closeDialog">
-      <el-form :model="form">
+      <el-form :model="form" :rules="addSymbolRules">
         <el-form-item label="基础币" :label-width="formLabelWidth">
           <el-select v-model="form.base_coin_id" placeholder="选择基础币">
             <el-option
@@ -24,6 +27,9 @@
                 :value="item.value">
             </el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item label="交易对Id">
+          <el-input v-model="form.symbol_id"/>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -47,7 +53,7 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
-import {addSymbol,getSymbolList,getCoinList} from '@/api/system/sys_user';
+import {addSymbol, getSymbolList, getCoinList, syncSymbolConfig} from '@/api/system/sys_user';
 import {ElMessage} from "element-plus";
 
 let dialogFormVisible = $ref(false)
@@ -58,8 +64,21 @@ const formLabelWidth = '140px'
 const form = ref({
   base_coin_id: '',
   quote_coin_id: '',
+  symbol_id: '',
 })
+const addSymbolRules = reactive({
+  symbol_id: [{ required: true, trigger: "blur",validator: validateNumber  }],
+})
+function validateNumber(rule, value, callback) {
 
+  // 使用正则表达式验证字符串是否仅包含数字
+  const regex = /^\d+$/;
+  if (!value ||  !regex.test(value)) {
+    callback(new Error("只能输入整数"));
+  } else {
+    callback();
+  }
+}
 const cancel = () =>{
   dialogFormVisible = false
   closeDialog()
@@ -81,10 +100,22 @@ const handleAddSymbol = async()=>{
 
 const submitForm = async()=>{
   dialogFormVisible = false
+  form.value.symbol_id = Number(form.value.symbol_id)
   let res = await addSymbol(form.value)
   if (res.code===0){
     ElMessage({
       message: '新增成功',
+      type: 'success',
+      duration: 5 * 1000,
+    });
+  }
+}
+
+const handleSyncSymbol = async () => {
+  let res = await syncSymbolConfig()
+  if (res.code===0){
+    ElMessage({
+      message: '同步成功',
       type: 'success',
       duration: 5 * 1000,
     });

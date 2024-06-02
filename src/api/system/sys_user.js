@@ -24,6 +24,26 @@ export const addSymbol = (data) => {
     data,
   })
 }
+export const syncSymbolConfig = () => {
+  return request({
+    url: '/sync_symbol_config',
+    method: 'post',
+  })
+}
+
+export const syncCoinConfig = () => {
+  return request({
+    url: '/sync_coin_config',
+    method: 'post',
+  })
+}
+
+export const syncErrorCode = () => {
+  return request({
+    url: '/sync_error_code',
+    method: 'post',
+  })
+}
 
 export const getSymbolList = (params) => {
   return request({
