@@ -52,7 +52,13 @@ export const getSymbolList = (params) => {
     params,
   })
 }
-
+export const getMatchList = (data) => {
+  return request({
+    url: '/get_match_list',
+    method: 'post',
+    data,
+  })
+}
 export const addCoin = (data) => {
   return request({
     url: '/add_coin',

@@ -4,6 +4,7 @@ const Home = () => import('@/views/layout/aside/home.vue')
 const Symbol = () => import('@/views/layout/aside/symbol.vue')
 const ErrorCode = () => import('@/views/layout/aside/errorCode.vue')
 const Coin = () => import('@/views/layout/aside/coin.vue')
+const Match = () => import('@/views/layout/aside/match.vue')
 const Login = () => import('@/views/login/index.vue')
 
 // 本地静态路由
@@ -12,11 +13,21 @@ export const constantRoutes = [
         path: '/',
         name: 'index',
         component:Index,
-        children: [{
+        children: [
+            {
+
+                path: '/matchedOrderList',
+                name: 'matchedOrderList',
+                component: Match,
+                meta: {
+                    title: '撮合列表',
+                },
+            },
+            {
 
             path: '/symbol',
             name: 'symbol',
-            component: Symbol,
+            component: Match,
             meta: {
                 title: '交易对管理',
             },

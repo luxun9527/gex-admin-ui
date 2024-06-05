@@ -30,6 +30,7 @@ import Content from '@/views/layout/content/index.vue'
                 <el-menu-item index="/symbol">交易对管理</el-menu-item>
                 <el-menu-item index="/coin">币种管理</el-menu-item>
                 <el-menu-item index="/errorCode">错误码管理</el-menu-item>
+                <el-menu-item index="/matchedOrderList">撮合列表</el-menu-item>
               </el-menu-item-group>
             </el-sub-menu>
           </el-menu>
