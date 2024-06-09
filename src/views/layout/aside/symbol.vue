@@ -93,8 +93,8 @@ const handleAddSymbol = async()=>{
   dialogFormVisible = true
   let res = await getCoinList({'page_no':1,'page_size':1000})
   res.data.list.forEach(d =>{
-    baseCoinOpts.push({ label: d.coin_name, value: d.id })
-    quoteCoinOpts.push({ label: d.coin_name, value: d.id })
+    baseCoinOpts.push({ label: d.coin_name, value: d.coin_id })
+    quoteCoinOpts.push({ label: d.coin_name, value: d.coin_id })
   })
 }
 

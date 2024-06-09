@@ -27,7 +27,7 @@ export const constantRoutes = [
 
             path: '/symbol',
             name: 'symbol',
-            component: Match,
+            component: Symbol,
             meta: {
                 title: '交易对管理',
             },
